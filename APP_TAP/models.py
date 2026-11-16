@@ -12,5 +12,5 @@ class Cotizacion(models.Model):
     fecha_actualizacion = models.DateTimeField()
 
 class Favorito(models.Model):
-    Cotizacion = models.ForeignKey(Cotizacion, on_delete=models.CASCADE)
+    cotizacion = models.ForeignKey(Cotizacion, on_delete=models.CASCADE)
     fecha_agregado = models.DateTimeField(auto_now_add=True)

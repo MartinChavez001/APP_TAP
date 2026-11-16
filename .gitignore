@@ -11,3 +11,5 @@ db.sqlite3
 Thumbs.db
 
 .vscode/
+
+APP_TAP.code-workspace
