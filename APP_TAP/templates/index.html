@@ -12,7 +12,7 @@
     <div class="container mt-4">
         <form method="POST" action="{% url 'agregar_favoritos' %}" class="mb-4">
             {% csrf_token %}
-            <label for="cotizacion_id" class="form-label">Elegí una cotización</label>
+            <label for="cotizacion_id" class="form-label">Elegí una de las cotizaciones</label>
             <div class="d-flex gap-2">
                 <select name="cotizacion_id" id="cotizacion_id" class="form-select">
                     {% for c in cotizaciones %}
