@@ -20,7 +20,7 @@
             <div class="d-flex gap-2">
                 <select name="cotizacion_id" id="cotizacion_id" class="form-select">
                     {% for c in cotizaciones %}
-                        <option value="{{ c.id }}">{{ c.nombre }} ({{ c.moneda }})</option>
+                        <option value="{{ c.id }}">Dólar {{ c.nombre }}</option>
                     {% endfor %}
                 </select>
                 <button type="submit" class="btn btn-primary">Agregar</button>
@@ -36,7 +36,7 @@
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 {% if fav.cotizacion.compra_anterior and fav.cotizacion.compra > fav.cotizacion.compra_anterior %}card-sube{% elif fav.cotizacion.compra_anterior and fav.cotizacion.compra < fav.cotizacion.compra_anterior %}card-baja{% endif %}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ fav.cotizacion.nombre }}</h5>
+                            <h5 class="card-title">Dólar {{ fav.cotizacion.nombre }}</h5>
                             {% if fav.cotizacion.moneda != fav.cotizacion.nombre %}
                             <h6 class="card-subtitle mb-2 text-muted">{{ fav.cotizacion.moneda }}</h6>
                             {% endif %}
