@@ -157,3 +157,24 @@ body {
         flex-direction: column;
     }
 }
+/* Variación porcentual */
+
+.variacion {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.variacion-sube {
+    color: #1682df;
+}
+
+.variacion-baja {
+    color: #8855cc;
+}
+
+.variacion-estable {
+    color: #808080;
+}
