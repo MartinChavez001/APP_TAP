@@ -36,7 +36,31 @@
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 {% if fav.cotizacion.compra_anterior and fav.cotizacion.compra > fav.cotizacion.compra_anterior %}card-sube{% elif fav.cotizacion.compra_anterior and fav.cotizacion.compra < fav.cotizacion.compra_anterior %}card-baja{% endif %}">
                         <div class="card-body">
-                            <h5 class="card-title">Dólar {{ fav.cotizacion.nombre }}</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <h5 class="card-title">Dólar {{ fav.cotizacion.nombre }}</h5>
+
+                                {% if fav.cotizacion.compra_anterior != None %}
+
+                                    {% if fav.cotizacion.compra > fav.cotizacion.compra_anterior %}
+                                        <span class="variacion variacion-sube">
+                                            ▲ {{ fav.cotizacion.variacion_porcentaje|floatformat:2 }}%
+                                        </span>
+
+                                    {% elif fav.cotizacion.compra < fav.cotizacion.compra_anterior %}
+                                        <span class="variacion variacion-baja">
+                                            ▼ {{ fav.cotizacion.variacion_porcentaje|floatformat:2 }}%
+                                        </span>
+
+                                    {% else %}
+                                        <span class="variacion variacion-estable">
+                                            — 0,00%
+                                        </span>
+                                    {% endif %}
+
+                                {% endif %}
+
+                            </div>
                             {% if fav.cotizacion.moneda != fav.cotizacion.nombre %}
                             <h6 class="card-subtitle mb-2 text-muted">{{ fav.cotizacion.moneda }}</h6>
                             {% endif %}

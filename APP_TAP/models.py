@@ -1,5 +1,18 @@
 from django.db import models
 from django.conf import settings
+from decimal import Decimal
+
+@property
+def variacion_porcentaje(self):
+    if self.compra_anterior is None or self.compra_anterior == 0:
+        return None
+
+    variacion = (
+        (self.compra - self.compra_anterior)
+        / self.compra_anterior
+    ) * Decimal("100")
+
+    return abs(variacion)
 
 class Cotizacion(models.Model):
     moneda = models.CharField(max_length=10)

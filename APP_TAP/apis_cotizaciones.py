@@ -13,20 +13,24 @@ def actualizacion_de_cotizaciones():
     datos = respuesta.json()
 
     for item in datos:
-        existente = Cotizacion.objects.filter(moneda = item["moneda"], casa = item["casa"]).first()
+         filtros = {
+        "moneda": item["moneda"],
+        "casa": item["casa"]
+    }
 
-        compra_anterior = existente.compra if existente else None
-        venta_anterior = existente.venta if existente else None
+    existente = Cotizacion.objects.filter(**filtros).first()
 
-        Cotizacion.objects.update_or_create(
-            moneda=item["nombre"],
-            casa=item["casa"],
-            defaults={
-                "nombre": item["nombre"],
-                "compra": item["compra"],
-                "venta": item["venta"],
-                "compra_anterior": compra_anterior,
-                "venta_anterior": venta_anterior,
-                "fecha_actualizacion": item["fechaActualizacion"],
-            }
-        )
+    compra_anterior = existente.compra if existente else None
+    venta_anterior = existente.venta if existente else None
+
+    Cotizacion.objects.update_or_create(
+        **filtros,
+        defaults={
+            "nombre": item["nombre"],
+            "compra": item["compra"],
+            "venta": item["venta"],
+            "compra_anterior": compra_anterior,
+            "venta_anterior": venta_anterior,
+            "fecha_actualizacion": item["fechaActualizacion"],
+        }
+    )
