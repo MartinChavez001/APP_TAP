@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-    
+
 class Cotizacion(models.Model):
     @property
     def variacion(self):
@@ -25,6 +25,7 @@ class Cotizacion(models.Model):
 
 class Favorito(models.Model):
     cotizacion = models.ForeignKey(Cotizacion, on_delete=models.CASCADE)
+    alias = models.CharField(max_length=50, blank=True, default="")
     fecha_agregado = models.DateTimeField(auto_now_add=True)
 
     class Meta:

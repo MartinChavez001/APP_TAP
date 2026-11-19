@@ -65,6 +65,21 @@
                                 <span class="badge bg-secondary mb-2">Sin cambios</span>
                             {% endif %}
                             <p class="actualizacion">Última actualización: {{ fav.cotizacion.fecha_actualizacion|date:"Y-m-d H:i" }}</p>
+                            {% if fav.alias %}
+                                <p>{{ fav.alias }}</p>
+                            {% endif %}
+                            
+                            <details class="mb-2">
+                                <summary>Editar alias</summary>
+                                
+                                <form method="POST" action="{% url 'editar_favorito' fav.id %}">
+                                    {% csrf_token %}
+                                    <label for="alias-{{ fav.id }}">Alias</label>
+                                    <input type="text" id="alias-{{ fav.id }}" name="alias" value="{{ fav.alias }}" maxlength="50">
+                                    <button type="submit">Guardar</button>
+                                </form>
+                            </details>
+                            
                             <form method="POST" action="{% url 'eliminar_favoritos' fav.id %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-outline-danger btn-sm">Quitar</button>

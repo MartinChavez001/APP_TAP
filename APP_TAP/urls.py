@@ -7,4 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('agregar-favoritos/', views.agregar_favoritos, name = 'agregar_favoritos'),
     path('elimar-favoritos/<int:favorito_id>', views.eliminar_favoritos, name = 'eliminar_favoritos'),
+    path('favoritos/<int:favorito_id>/editar', views.editar_favorito, name="editar_favorito")
 ]
