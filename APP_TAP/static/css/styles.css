@@ -178,3 +178,9 @@ body {
 .variacion-estable {
     color: #808080;
 }
+
+.actualizacion {
+    font-size: 0.75rem;
+    color: #5d7f96;
+    margin: 0 0 0.8rem;
+}

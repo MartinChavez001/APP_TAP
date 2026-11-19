@@ -36,30 +36,17 @@
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 {% if fav.cotizacion.compra_anterior and fav.cotizacion.compra > fav.cotizacion.compra_anterior %}card-sube{% elif fav.cotizacion.compra_anterior and fav.cotizacion.compra < fav.cotizacion.compra_anterior %}card-baja{% endif %}">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-
+                            <div class="d-flex justify-content-between align-items-baseline">
                                 <h5 class="card-title">Dólar {{ fav.cotizacion.nombre }}</h5>
-
-                                {% if fav.cotizacion.compra_anterior != None %}
-
+                                {% if fav.cotizacion.compra_anterior %}
                                     {% if fav.cotizacion.compra > fav.cotizacion.compra_anterior %}
-                                        <span class="variacion variacion-sube">
-                                            ▲ {{ fav.cotizacion.variacion_porcentaje|floatformat:2 }}%
-                                        </span>
-
+                                        <span class="variacion variacion-sube">▲ {{ fav.cotizacion.variacion|floatformat:2 }}%</span>
                                     {% elif fav.cotizacion.compra < fav.cotizacion.compra_anterior %}
-                                        <span class="variacion variacion-baja">
-                                            ▼ {{ fav.cotizacion.variacion_porcentaje|floatformat:2 }}%
-                                        </span>
-
+                                        <span class="variacion variacion-baja">▼ {{ fav.cotizacion.variacion|floatformat:2 }}%</span>
                                     {% else %}
-                                        <span class="variacion variacion-estable">
-                                            — 0,00%
-                                        </span>
+                                        <span class="variacion variacion-estable">= {{ fav.cotizacion.variacion|floatformat:2 }}%</span>
                                     {% endif %}
-
                                 {% endif %}
-
                             </div>
                             {% if fav.cotizacion.moneda != fav.cotizacion.nombre %}
                             <h6 class="card-subtitle mb-2 text-muted">{{ fav.cotizacion.moneda }}</h6>
@@ -74,8 +61,10 @@
                                 <span class="badge bg-success mb-2">▲ Subió</span>
                             {% elif fav.cotizacion.compra_anterior and fav.cotizacion.compra < fav.cotizacion.compra_anterior %}
                                 <span class="badge bg-danger mb-2">▼ Bajó</span>
+                            {% elif fav.cotizacion.compra_anterior %}
+                                <span class="badge bg-secondary mb-2">Sin cambios</span>
                             {% endif %}
-                            
+                            <p class="actualizacion">Última actualización: {{ fav.cotizacion.fecha_actualizacion|date:"Y-m-d H:i" }}</p>
                             <form method="POST" action="{% url 'eliminar_favoritos' fav.id %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-outline-danger btn-sm">Quitar</button>
